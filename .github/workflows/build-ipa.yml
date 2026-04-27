@@ -28,8 +28,9 @@ jobs:
       - name: Sync Capacitor iOS
         run: npx cap sync ios
 
-      - name: Build unsigned .app
+      - name: Clean SPM cache & Build unsigned .app
         run: |
+          rm -rf ~/Library/Caches/org.swift.swiftpm
           cd ios/App
           xcodebuild -project App.xcodeproj \
             -scheme App \
