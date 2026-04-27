@@ -186,7 +186,7 @@ async function runToolLoop(
 
     if (msg.tool_calls && msg.tool_calls.length > 0) {
       toolsCalled = true;
-      const assistantMsg: Record<string, any> = { role: 'assistant', content: msg.content || '', tool_calls: msg.tool_calls };
+      const assistantMsg: { role: string; content: string; [key: string]: any } = { role: 'assistant', content: msg.content || '', tool_calls: msg.tool_calls };
       if (msg.reasoning_content) assistantMsg.reasoning_content = msg.reasoning_content;
       working.push(assistantMsg);
       for (const tc of msg.tool_calls) {
@@ -194,7 +194,7 @@ async function runToolLoop(
         working.push(result);
       }
     } else {
-      const assistantMsg: Record<string, any> = { role: 'assistant', content: msg.content || '' };
+      const assistantMsg: { role: string; content: string; [key: string]: any } = { role: 'assistant', content: msg.content || '' };
       if (msg.reasoning_content) assistantMsg.reasoning_content = msg.reasoning_content;
       working.push(assistantMsg);
       break;
