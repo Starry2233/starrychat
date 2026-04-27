@@ -1,0 +1,25 @@
+node_modules
+dist
+*.local
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Capacitor iOS
+ios/App/Pods
+ios/App/build
+ios/App/.build
+
+# Environment
+.env
+.env.local
+
+# Vite cache
+node_modules/.vite
