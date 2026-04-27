@@ -303,7 +303,12 @@ export default function ChatLayout() {
       ];
 
       // Run tool-calling loop (non-streaming, may execute tools)
-      const { messages: enriched } = await runToolLoop(conversation, settings);
+      const { messages: enriched, toolsCalled } = await runToolLoop(conversation, settings);
+
+      // When no tools were called, the last assistant message in enriched already
+      // contains the response — pop it so streaming regenerates fresh content
+      // (otherwise the model concatenates onto its own prior reply)
+      if (!toolsCalled) enriched.pop();
 
       // Stream the final response (tool results already included)
       const result = await streamAiApi(
